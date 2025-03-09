@@ -29,7 +29,7 @@ def employees_by_quarter(main_path):
     employees_full_df["Q"].replace({1.0: "Q1", 2.0: "Q2", 3.0: "Q3", 4.0: "Q4"}, inplace=True)
     grouped_df = employees_full_df.groupby(["department", "job", "Q"]).size().reset_index(name="number")
     result_df = grouped_df.pivot_table(index=["department", "job"], columns="Q", values="number", fill_value=0)
-    result_df.reset_index()
+    result_df = result_df.reset_index()
     result_df = result_df.sort_values(by=["department", "job"], ascending=[True, True])
     return result_df
 
