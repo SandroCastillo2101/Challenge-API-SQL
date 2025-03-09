@@ -1,5 +1,9 @@
 # Challenge-API-SQL
 
+[v0.4.0] - SQL added
+
+In this version, a new SQLite 3 database is created to receive queries in order to make new reports.
+
 [v0.3.0] - CSV file sent
 
 In this version, a function to receive a CSV file and save it is created.

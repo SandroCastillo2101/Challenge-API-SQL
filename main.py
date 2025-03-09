@@ -1,4 +1,4 @@
-from modules.transform.Transformation import employees_by_quarter, hired_employees_by_department
+from modules.transform.Transformation import employees_by_quarter_db, hired_employees_by_department_db
 from flask import Flask, jsonify, request
 import os
 
@@ -30,13 +30,13 @@ def upload_csv():
 
 @app.route("/employees_by_quarter", methods=["GET"])
 def get_employees_by_quarter():
-    result_df = employees_by_quarter(main_path)
+    result_df = employees_by_quarter_db(main_path)
     return jsonify(result_df.to_dict(orient="records"))
 
 
 @app.route("/hired_employees", methods=["GET"])
 def get_hired_employees_by_department():
-    result_df = hired_employees_by_department(main_path)
+    result_df = hired_employees_by_department_db(main_path)
     return jsonify(result_df.to_dict(orient="records"))
 
 
