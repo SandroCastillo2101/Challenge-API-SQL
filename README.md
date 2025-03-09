@@ -1,2 +1,6 @@
 # Challenge-API-SQL
-Challenge of an API that ingest data to a database
+
+[v0.1.0] - First steps
+
+In this version, a simple project has been created to show the metrics that are requested on Section 2.
+
