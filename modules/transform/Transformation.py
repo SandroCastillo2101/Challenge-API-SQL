@@ -10,16 +10,43 @@ engine = create_engine("sqlite:///temp_db.sqlite", echo=True)
 def put_inputs_to_db(main_path):
     departments_df = read_departments(main_path + "/departments/departments.csv")
     departments_df.rename(columns={"id": "department_id"}, inplace=True)
-    departments_df.to_sql("departments", con=engine, if_exists="replace", index=False)
+
+    with engine.begin() as conn:
+        departments_df.to_sql(
+            "departments",
+            con=conn,
+            if_exists="replace",
+            index=False,
+            chunksize=499,
+            method="multi"
+        )
 
     employees_df = read_employees(main_path + "/employees/hired_employees.csv")
     employees_df[["id", "department_id", "job_id"]] = employees_df[["id", "department_id", "job_id"]].fillna(0)
     employees_df = employees_df.astype({"id": "int64", "department_id": "int64", "job_id": "int64"})
-    employees_df.to_sql("employees", con=engine, if_exists="replace", index=False)
+
+    with engine.begin() as conn:
+        employees_df.to_sql(
+            "employees",
+            con=conn,
+            if_exists="replace",
+            index=False,
+            chunksize=199,
+            method="multi"
+        )
 
     jobs_df = read_jobs(main_path + "/jobs/Jobs.csv")
     jobs_df.rename(columns={"id": "job_id"}, inplace=True)
-    jobs_df.to_sql("jobs", con=engine, if_exists="replace", index=False)
+
+    with engine.begin() as conn:
+        jobs_df.to_sql(
+            "jobs",
+            con=conn,
+            if_exists="replace",
+            index=False,
+            chunksize=499,
+            method="multi"
+        )
 
     return 0
 

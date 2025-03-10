@@ -1,5 +1,9 @@
 # Challenge-API-SQL
 
+[v0.5.0] - Batch transactions added
+
+In this version, to_sql method is modified to supports batch transactions.
+
 [v0.4.0] - SQL added
 
 In this version, a new SQLite 3 database is created to receive queries in order to make new reports.
